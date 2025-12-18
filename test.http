@@ -1,0 +1,16 @@
+### Send POST request with json body
+POST http://localhost/api/v1/tt
+Content-Type: application/json
+
+{
+    "title": "test title",
+    "message": "test message"
+}
+
+### GET request with a header
+GET http://localhost/api/v1/tt/3
+Accept: application/json
+
+### GET request with a header
+GET http://localhost/api/v1/tt
+Accept: application/json

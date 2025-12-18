@@ -1,0 +1,137 @@
+openapi: 3.0.0
+info:
+  title: Создание Trouble Ticket
+  version: 1.0.0
+servers:
+  - url: http://localhost/api/v1/
+    description: Dev server
+paths:
+  /tt:
+    get:
+      summary: Метод получения всех заявок
+      tags:
+        - Trouble Ticket
+      operationId: getAllTroubleTicket
+      responses:
+        '200':
+          description: Успешный ответ со списком заявок
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TroubleTickets"
+        'default':
+          description: Ошибка
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Метод создания заявки
+      tags:
+        - Trouble Ticket
+      operationId: create TroubleTicket
+      responses:
+        '201':
+          description: Успешный ответ с созданной заявкой
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TroubleTicket"
+        'default':
+          description: Ошибка
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TroubleTicketWithoutId"
+
+  /tt/{id}:
+    get:
+      summary: Метод получения заявки по идентификатору
+      tags:
+        - Trouble Ticket
+      operationId: getApplicationFormById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор заявки
+          schema:
+            type: integer
+            example: 10
+
+      responses:
+        '200':
+          description: Успешный ответ с одной заявкой
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TroubleTicket"
+        'default':
+          description: Ошибка
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+
+components:
+  schemas:
+    TroubleTicket:
+      type: object
+      required:
+        - id
+        - title
+        - message
+        - status
+      properties:
+        id:
+          type: integer
+          example: 10
+        title:
+          type: string
+          example: Test
+        message:
+          type: string
+          example: Test
+        status:
+          type: string
+          enum:
+            - In work
+            - Done
+          description: Статус заказа
+    TroubleTicketWithoutId:
+      type: object
+      required:
+        - title
+        - message
+        - status
+      properties:
+        title:
+          type: string
+          example: Test
+        message:
+          type: string
+          example: Test
+        status:
+          type: string
+          enum:
+            - In work
+            - Done
+          description: Статус заказа
+    TroubleTickets:
+      type: array
+      items:
+        $ref: "#/components/schemas/TroubleTicket"
+    Error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
