@@ -1,7 +1,7 @@
 <?php
 
+use EvgenyRomanov\SlimCallableResolver;
 use Illuminate\Container\Container;
-use App\Infrastructure\CustomCallableResolver;
 use Laminas\ConfigAggregator\PhpFileProvider;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Slim\{App, Factory\AppFactory, Interfaces\CallableResolverInterface, Psr7\Factory\ResponseFactory};
@@ -23,7 +23,7 @@ return static function (Container $container): void {
     });
 
     $container->singleton(CallableResolverInterface::class, function (Container $container) {
-        return new CustomCallableResolver($container);
+        return new SlimCallableResolver($container);
     });
 
     $container->singleton(ServerRequestFactoryInterface::class, function () {

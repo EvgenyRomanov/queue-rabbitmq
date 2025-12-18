@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "df59daed792f0e086efad3e4e033752d",
+    "content-hash": "55f105b6074c75b479be8a8a0dd66f72",
     "packages": [
         {
             "name": "brick/math",
@@ -621,6 +621,47 @@
                 }
             ],
             "time": "2025-08-19T06:41:07+00:00"
+        },
+        {
+            "name": "evgeny-romanov/slim-callable-resolver",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/EvgenyRomanov/slim-callable-resolver.git",
+                "reference": "e02254fb7eb018f8a8e27f5b847e46487027c6e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/EvgenyRomanov/slim-callable-resolver/zipball/e02254fb7eb018f8a8e27f5b847e46487027c6e1",
+                "reference": "e02254fb7eb018f8a8e27f5b847e46487027c6e1",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/http-message": "^2.0",
+                "slim/slim": "^4.15"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.90",
+                "illuminate/container": "^12.43",
+                "phpunit/phpunit": "^12.4",
+                "slim/psr7": "^1.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EvgenyRomanov\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "support": {
+                "issues": "https://github.com/EvgenyRomanov/slim-callable-resolver/issues",
+                "source": "https://github.com/EvgenyRomanov/slim-callable-resolver/tree/v1.0.1"
+            },
+            "time": "2025-12-18T11:57:59+00:00"
         },
         {
             "name": "fakerphp/faker",

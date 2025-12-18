@@ -1,5 +1,5 @@
 {
-    "name": "evgeny-romanov/skeleton-http-framework",
+    "name": "evgeny-romanov/queue-rabbitmq",
     "type": "project",
     "license": "BSD-3-Clause",
     "config": {
@@ -10,6 +10,7 @@
         "ext-json": "*",
         "ext-pdo": "*",
         "doctrine/migrations": "^3.9",
+        "evgeny-romanov/slim-callable-resolver": "^1.0",
         "fakerphp/faker": "^1.24",
         "guzzlehttp/guzzle": "^7.10",
         "illuminate/container": "^12.33",
