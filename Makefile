@@ -32,6 +32,9 @@ lint:
 cs-fix:
 	docker compose run --rm php-cli composer php-cs-fixer fix
 
+consume:
+	docker compose run --rm php-cli php bin/console.php amqp:consume_notify
+
 analyze:
 	docker compose run --rm php-cli composer psalm -- --no-diff
 
