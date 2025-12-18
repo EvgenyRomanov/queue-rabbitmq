@@ -11,8 +11,8 @@
         <directory name="tests" />
         <ignoreFiles>
             <directory name="vendor" />
-            <directory name="src/Infrastructure/Job" />
             <file name="src/Infrastructure/CustomCallableResolver.php" />
+            <file name="src/Domain/Model/TroubleTicket.php" />
             <directory name="public" />
         </ignoreFiles>
     </projectFiles>

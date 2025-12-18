@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ### GET request with a header
-GET http://localhost/api/v1/tt/4
+GET http://localhost/api/v1/tt/6
 Accept: application/json
 
 ### GET request with a header

@@ -12,6 +12,7 @@ use DomainException;
 
 final readonly class TroubleTicketService
 {
+    /** @psalm-suppress PossiblyUnusedMethod */
     public function __construct(
         private TroubleTicketRepository $troubleTicketRepository,
         private \Illuminate\Contracts\Events\Dispatcher $eventDispatcher
@@ -32,6 +33,8 @@ final readonly class TroubleTicketService
 
         /** @var TroubleTicket $tt */
         $tt = $this->troubleTicketRepository->findOneById($id);
+
+        /** @psalm-suppress DocblockTypeContradiction */
         if ($tt === null) {
             throw new DomainException('Trouble Ticket not found.');
         }

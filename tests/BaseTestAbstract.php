@@ -56,6 +56,7 @@ abstract class BaseTestAbstract extends TestCase
         $this->capsule->getConnection()->rollback();
     }
 
+    /** @psalm-suppress PossiblyUnusedMethod */
     protected function createRequest(
         string $method,
         string $path,
@@ -79,6 +80,7 @@ abstract class BaseTestAbstract extends TestCase
         return new \Slim\Psr7\Request($method, $uri, $h, $cookies, $serverParams, $stream);
     }
 
+    /** @psalm-suppress PossiblyUnusedMethod */
     protected function parseResponse(ResponseInterface $response): mixed
     {
         return json_decode((string) $response->getBody(), true);

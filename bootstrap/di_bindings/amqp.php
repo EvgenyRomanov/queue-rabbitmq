@@ -5,22 +5,22 @@ use PhpAmqpLib\Connection\AMQPStreamConnection;
 use Laminas\ConfigAggregator\ConfigAggregator;
 
 return static function (Container $container): void {
-    $container->singleton(AMQPStreamConnection::class, function ($container) {
+    $container->singleton(AMQPStreamConnection::class, function (Container $container) {
         /** @var ConfigAggregator $configAggregator */
         $configAggregator = $container[ConfigAggregator::class];
         /** @var array{
-         *     migrations: array<string, mixed>,
-         *     db: array{database: string, username: string, password: string, host: string, driver: string, port: int}
+         *     amqp: array{host: string, port: int, username: string, password: string, vhost: string}
          *     } $config
          */
         $config = $configAggregator->getMergedConfig();
+        $configAmqp = $config['amqp'];
 
         return new AMQPStreamConnection(
-            $config['amqp']['host'],
-            $config['amqp']['port'],
-            $config['amqp']['username'],
-            $config['amqp']['password'],
-            $config['amqp']['vhost']
+            $configAmqp['host'],
+            $configAmqp['port'],
+            $configAmqp['username'],
+            $configAmqp['password'],
+            $configAmqp['vhost']
         );
     });
 };

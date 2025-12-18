@@ -14,5 +14,6 @@ interface TroubleTicketRepository
 
     public function save(TroubleTicket $tt): void;
 
+    /** @psalm-suppress PossiblyUnusedMethod */
     public function delete(TroubleTicket $tt): void;
 }

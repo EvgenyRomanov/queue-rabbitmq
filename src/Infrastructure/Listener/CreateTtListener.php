@@ -9,6 +9,7 @@ use App\Service\Event\CreateTtEvent;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
+/** @psalm-suppress UnusedClass */
 final readonly class CreateTtListener
 {
     public function __construct(private AMQPStreamConnection $connection) {}
@@ -25,9 +26,8 @@ final readonly class CreateTtListener
         $data = [
             'id_tt' => $event->idTt,
         ];
-
         $message = new AMQPMessage(
-            json_encode($data),
+            (string) json_encode($data),
             ['content_type' => 'text/plain']
         );
 

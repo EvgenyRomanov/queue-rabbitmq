@@ -14,6 +14,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/** @psalm-suppress UnusedClass */
 #[AsCommand(name: 'amqp:consume_notify', description: 'Читает нотификации о создании тикетов')]
 final class ConsumeCommand extends Command
 {
@@ -38,18 +39,30 @@ final class ConsumeCommand extends Command
             AMQPHelper::initNotifications($channel);
             AMQPHelper::registerShutdown($connection, $channel);
 
-            $consumerTag = 'consumer_' . getmypid();
+            /** @var int $myPid */
+            $myPid = getmypid();
+            $consumerTag = 'consumer_' . $myPid;
+
+            /** @psalm-suppress MissingClosureParamType */
             $channel->basic_consume(AMQPHelper::QUEUE_NOTIFICATIONS, $consumerTag, false, false, false, false, function ($message) use ($output): void {
+                /**
+                 * @var array{id_tt: int} $msg
+                 * @var object{body: string, message: string, delivery_info: array{string, mixed}} $message
+                 */
+
                 $msg = json_decode($message->body, true);
                 $output->writeln(print_r($msg, true));
                 $this->troubleTicketService->updateStatus($msg['id_tt']);
                 $output->writeln("Message processed");
 
                 /** @var AMQPChannel $channel */
+                /** @psalm-suppress MixedAssignment, InvalidArrayOffset */
                 $channel = $message->delivery_info['channel'];
+                /** @psalm-suppress MixedMethodCall, PossiblyInvalidMethodCall, PossiblyInvalidMethodCall, InvalidArrayOffset */
                 $channel->basic_ack($message->delivery_info['delivery_tag']);
             });
 
+            /** @psalm-suppress InternalProperty */
             while (\count($channel->callbacks)) {
                 $channel->wait();
             }
