@@ -6,7 +6,5 @@ namespace App\Service\Event;
 
 final readonly class CreateTtEvent
 {
-    public function __construct(public int $idTt)
-    {
-    }
+    public function __construct(public int $idTt) {}
 }

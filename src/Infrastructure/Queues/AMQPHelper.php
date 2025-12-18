@@ -7,7 +7,7 @@ namespace App\Infrastructure\Queues;
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
-class AMQPHelper
+final class AMQPHelper
 {
     public const EXCHANGE_NOTIFICATIONS = 'notifications';
     public const QUEUE_NOTIFICATIONS = 'notifications';
@@ -21,7 +21,7 @@ class AMQPHelper
 
     public static function registerShutdown(AMQPStreamConnection $connection, AMQPChannel $channel): void
     {
-        register_shutdown_function(function (AMQPChannel $channel, AMQPStreamConnection $connection) {
+        register_shutdown_function(static function (AMQPChannel $channel, AMQPStreamConnection $connection): void {
             $channel->close();
             $connection->close();
         }, $channel, $connection);

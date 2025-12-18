@@ -1,19 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 use App\Domain\Model\Status;
 use App\Domain\Model\TroubleTicket;
 use App\Domain\Model\TroubleTicketRepository;
 use App\Service\Event\CreateTtEvent;
+use DomainException;
 
 final readonly class TroubleTicketService
 {
     public function __construct(
         private TroubleTicketRepository $troubleTicketRepository,
         private \Illuminate\Contracts\Events\Dispatcher $eventDispatcher
-    ){
-    }
+    ) {}
 
     public function create(CreateTtDto $dto): array
     {
@@ -31,7 +33,7 @@ final readonly class TroubleTicketService
         /** @var TroubleTicket $tt */
         $tt = $this->troubleTicketRepository->findOneById($id);
         if ($tt === null) {
-            throw new \DomainException('Trouble Ticket not found.');
+            throw new DomainException('Trouble Ticket not found.');
         }
 
         $tt->status = Status::DONE;

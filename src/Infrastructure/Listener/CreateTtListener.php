@@ -11,9 +11,7 @@ use PhpAmqpLib\Message\AMQPMessage;
 
 final readonly class CreateTtListener
 {
-    public function __construct(private AMQPStreamConnection $connection)
-    {
-    }
+    public function __construct(private AMQPStreamConnection $connection) {}
 
     public function handle(CreateTtEvent $event): void
     {

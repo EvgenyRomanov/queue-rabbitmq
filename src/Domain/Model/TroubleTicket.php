@@ -7,7 +7,6 @@ namespace App\Domain\Model;
 use App\Factories\TroubleTicketFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $id
@@ -34,7 +33,7 @@ final class TroubleTicket extends Model
         return new self([
             'title' => $title,
             'message' => $message,
-            'status' => Status::IN_WORK
+            'status' => Status::IN_WORK,
         ]);
     }
 }

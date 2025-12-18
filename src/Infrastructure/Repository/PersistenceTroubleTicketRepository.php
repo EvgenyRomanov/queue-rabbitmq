@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Infrastructure\Repository;
 
 use App\Domain\Model\TroubleTicket;
 use App\Domain\Model\TroubleTicketRepository;
 use Illuminate\Support\Collection;
+use RuntimeException;
 
-class PersistenceTroubleTicketRepository implements TroubleTicketRepository
+final class PersistenceTroubleTicketRepository implements TroubleTicketRepository
 {
     public function findOneById(int $id): ?TroubleTicket
     {
@@ -21,14 +24,14 @@ class PersistenceTroubleTicketRepository implements TroubleTicketRepository
     public function save(TroubleTicket $tt): void
     {
         if (! $tt->save()) {
-            throw new \RuntimeException('TroubleTicket saving error.');
+            throw new RuntimeException('TroubleTicket saving error.');
         }
     }
 
     public function delete(TroubleTicket $tt): void
     {
         if (! $tt->delete()) {
-            throw new \RuntimeException('TroubleTicket deleting error.');
+            throw new RuntimeException('TroubleTicket deleting error.');
         }
     }
 }
